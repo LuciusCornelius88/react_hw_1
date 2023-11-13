@@ -1,16 +1,13 @@
-export const App = () => {
+import { Profile } from './Profile/Profile';
+import { Statistics } from './Statistics/Statistics';
+import profileData from '../data/user.json';
+import statData from '../data/data.json';
+
+export default function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Profile profileData={profileData} />
+      <Statistics statData={{ title: 'Upload stats', data: statData }} />
     </div>
   );
-};
+}
