@@ -1,20 +1,37 @@
 import PropTypes from 'prop-types';
+import * as StatsStyles from './Statistics.styled';
+
+const randomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+
+  return color;
+};
 
 export const Statistics = ({ statData }) => {
   const { title, data } = statData;
   return (
-    <section className="statistics">
-      <h2 className="title">{title}</h2>
-
-      <ul className="stat-list">
-        {data.map(({ id, label, percentage }) => (
-          <li className="item" key={id}>
-            <span className="label">{label}: </span>
-            <span className="percentage">{percentage}%</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <StatsStyles.StatsSection className="statistics">
+      <StatsStyles.Container className="container">
+        <StatsStyles.TitleContainer className="title-container">
+          <h2 className="title">{title.toUpperCase()}</h2>
+        </StatsStyles.TitleContainer>
+        <StatsStyles.StatisticsContainer className="stats-container">
+          <StatsStyles.StatisticsList className="stat-list">
+            {data.map(({ id, label, percentage }) => (
+              <StatsStyles.StatisticsItem className="item" key={id} color={randomColor()}>
+                <span className="label">{label}: </span>
+                <span className="percentage">{percentage}%</span>
+              </StatsStyles.StatisticsItem>
+            ))}
+          </StatsStyles.StatisticsList>
+        </StatsStyles.StatisticsContainer>
+      </StatsStyles.Container>
+    </StatsStyles.StatsSection>
   );
 };
 
